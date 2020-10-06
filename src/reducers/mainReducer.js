@@ -32,10 +32,16 @@ export const reducer = (state = startState, action) => {
     return temp;
   };
 
+  const getPrice = () => {
+    const tempItem = getObj();
+    return tempItem.price;
+  };
+
   switch (action.type) {
     case ADD_FEATURE:
       return {
         ...state,
+        additionalPrice: state.additionalPrice + getPrice(),
         car: {
           ...state.car,
           features: [...state.car.features, getObj()],
@@ -44,6 +50,7 @@ export const reducer = (state = startState, action) => {
     case REMOVE_FEATURE:
       return {
         ...state,
+        additionalPrice: state.additionalPrice - getPrice(),
         car: {
           ...state.car,
           features: removeObj(),
